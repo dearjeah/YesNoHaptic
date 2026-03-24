@@ -8,14 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var currentQuestion: String = "Tap a button to start!"
+    
+    let questions = [
+        "Do you like SwiftUI?",
+        "Is the sky blue?",
+        "Do you enjoy coding?",
+        "Is pizza delicious?",
+        "Do you use iOS?"
+    ]
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Spacer()
+            Text(currentQuestion)
+                .font(.title)
+                .padding()
+            
+            Spacer()
+            HStack {
+                Button("Yes") {
+                    randomizeQuestion()
+                }
+                .padding()
+                .background(Color.green.opacity(0.7))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                
+                Button("No") {
+                    randomizeQuestion()
+                }
+                .padding()
+                .background(Color.red.opacity(0.7))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+            .padding(.bottom, 40)
+            Spacer()
         }
-        .padding()
+    }
+    
+    func randomizeQuestion() {
+        if let random = questions.randomElement() {
+            currentQuestion = random
+        }
     }
 }
 
